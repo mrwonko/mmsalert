@@ -104,6 +104,9 @@ def main():
         print("we're in a pickle, old_result is {}".format(old_result))
         old_result = Result(0, {})
     soup = fetch_soup()
+    # write to file for parsing error post-mortems etc.
+    with open(CACHE, "w") as f:
+        f.write(soup.prettify())
     result = parse(soup)
     diff = old_result.diff(result)
     print(len(diff))
